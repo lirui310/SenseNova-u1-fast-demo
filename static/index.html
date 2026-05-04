@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SenseNova U1 Fast Demo</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workspace">
+        <div class="intro">
+          <div>
+            <p class="eyebrow">SenseNova U1 Fast</p>
+            <h1>图像生成 Demo</h1>
+          </div>
+          <div class="api-cluster">
+            <a class="docs-link" id="docsLink" href="https://platform.sensenova.cn/docs" target="_blank" rel="noreferrer">
+              查看开发文档
+            </a>
+            <div class="api-chip">
+              <span id="modelName">sensenova-u1-fast</span>
+              <strong>POST /v1/images/generations</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-grid">
+          <form class="panel composer" id="generationForm">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Input</p>
+                <label for="prompt">图像描述文本</label>
+              </div>
+              <span class="counter" id="promptCounter">0 / 4096 token</span>
+            </div>
+
+            <textarea
+              id="prompt"
+              name="prompt"
+              maxlength="20000"
+              spellcheck="false"
+              placeholder="输入要生成的图片描述。U1 Fast 当前 demo 仅支持文本生成图片。"
+            ></textarea>
+
+            <div class="controls">
+              <label class="field">
+                <span>尺寸</span>
+                <select id="size" name="size"></select>
+              </label>
+
+              <div class="field compact">
+                <span>数量</span>
+                <div class="locked-count" id="count">1</div>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="primary-button" id="generateButton" type="submit">
+                <span class="button-icon" aria-hidden="true">✦</span>
+                <span>生成图片</span>
+              </button>
+              <button class="ghost-button" id="clearButton" type="button">清空</button>
+            </div>
+          </form>
+
+          <section class="panel output" aria-live="polite">
+            <div class="output-head">
+              <div>
+                <p class="eyebrow">Result</p>
+                <h2>生成结果</h2>
+              </div>
+              <span class="status-pill" id="statusPill">待生成</span>
+            </div>
+
+            <div class="empty-state" id="emptyState">
+              <div class="preview-mark"></div>
+              <p>生成后的图片和 URL 会显示在这里。</p>
+            </div>
+
+            <div class="result-grid" id="resultGrid"></div>
+            <details class="raw-panel" id="rawPanel" hidden>
+              <summary>查看原始响应</summary>
+              <pre class="raw-response" id="rawResponse"></pre>
+            </details>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
