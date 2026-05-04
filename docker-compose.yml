@@ -3,7 +3,7 @@ services:
     build:
       context: .
       args:
-        PYTHON_IMAGE: ${PYTHON_IMAGE:-python:3.11-slim}
+        PYTHON_IMAGE: ${PYTHON_IMAGE:-docker.m.daocloud.io/library/python:3.11-slim}
     ports:
       - "9012:8000"
     env_file:
