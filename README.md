@@ -66,6 +66,32 @@ http://localhost:9012
 
 Docker 镜像会以非 root 用户运行应用，容器内端口为 `8000`，本机默认映射端口为 `9012`。
 
+### Docker Hub 超时
+
+如果线上构建时看到类似下面的错误：
+
+```text
+failed to do request ... net/http: TLS handshake timeout
+```
+
+通常是部署环境拉取 Docker Hub 基础镜像超时，不是 `WORKDIR /app` 或应用代码错误。可以在 `.env` 中覆盖基础镜像：
+
+```env
+PYTHON_IMAGE=docker.1ms.run/library/python:3.11-slim
+```
+
+如果当前代理仍然超时，换一个部署环境可访问的镜像源，例如：
+
+```env
+PYTHON_IMAGE=docker.m.daocloud.io/library/python:3.11-slim
+```
+
+也可以命令行临时指定：
+
+```bash
+PYTHON_IMAGE=docker.m.daocloud.io/library/python:3.11-slim docker compose build
+```
+
 ## 本地运行
 
 ```bash
